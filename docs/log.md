@@ -5,6 +5,17 @@ title: 문서 변경 이력
 
 # 변경 이력
 
+## 2026-10-15 — v0.5 (사용자 지시 반영 + 도구 구현)
+- 지시: **새 SPM을 만들지 말고 사용자의 C 코드를 분석·개선할 것.** 작성 중이던 Python SPM은 커밋 전에 삭제(ADR-021)
+- 확인: 셀 단계는 모델 전압 대 실측 전압 최소화, 세트 탑재는 여러 환경에서 SOC·SOH·ISD 정확도. C 언어, 사내 빌드 환경과 별개로 연구 지원
+- 구현
+  - `bmskit.codeintel.cparams`: C 파라미터 후보 추출
+  - `bmskit.sil`: `bms_sil_api.h`, `wrapgen`, `runner`
+  - `bmskit.optim.infer`: 서명·민감도·예측·식별성·선택·LM·검증 제외
+  - `bmskit.metrics.accuracy`: 세트 SOC·SOH·ISD, 환경별
+  - 테스트 15개 (Python 3.10, 3.13 통과)
+- 문서: [연구 워크플로](/guide/research_workflow.md), [도구 체인 검증 실험](/research/07_experiment_toolchain_check.md), SBL에 ISD·SOH·기준값·환경 이름 추가, ADR-021~023, Q12 답변, Q13 추가, 00·03·09·10 갱신
+
 ## 2026-10-15 — v0.4 (사용자 답변 반영)
 - 확인: 모델은 **SPM** / 사내에서 Claude를 외부와 똑같이 사용, **외부 MCP만 불가** / FW 저전력 모델은 **연구 단계**, 현재는 모델 정확도 향상 중
 - 신규: [SPM 모델 정확도 향상 트랙](/plan/10_model_accuracy_track.md) — 벤치마크·지표 고정, 잔차의 파라미터/구조/잡음 분해, SPM 확장 후보, 정확도-연산량 파레토(FW 저전력 연구 지원)

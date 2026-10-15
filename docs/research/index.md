@@ -19,3 +19,4 @@ description: 2026-10-15에 수행한 웹 조사 기록. 각 사실에 검증 수
 | [04 BMS 알고리즘·신규 기능](/research/04_bms_algorithms_features.md) | foxBMS, ISC 감지, 스웰링, RUL, 만충 시간 |
 | [05 라이선스·의존성](/research/05_licenses_dependencies.md) | 후보 라이브러리별 라이선스와 정책 |
 | [06 데이터셋·규제](/research/06_datasets_regulations.md) | 공개 배터리 데이터셋, EU 배터리 규정 |
+| [07 도구 체인 검증 실험](/research/07_experiment_toolchain_check.md) | C 픽스처 합성 복원 시험 결과 |

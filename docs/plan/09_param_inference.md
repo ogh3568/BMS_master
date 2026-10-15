@@ -150,6 +150,22 @@ LLM 규칙
 - 서로 다른 정보가 담긴 프로파일을 섞는다: 펄스+이완(HPPC류), 완전 충방전(끝단), 여러 온도, 주행·필드.
 - 참값(`ref.i`, `ref.ah`)이 있으면 센서 오프셋과 모델 오차를 분리할 수 있다.
 
+## 4-1. 구현 현황 (2026-10-15)
+
+| 단계 | 구현 | 위치 |
+|---|---|---|
+| [A] 코드에서 후보 발견 | ✅ `#define`·전역·static·구조체·테이블·매직 넘버, 사용 함수, 물리 묶음 추정 | `bmskit.codeintel.cparams` |
+| [C] SIL 재생 | ✅ C ABI(`bms_sil_api.h`), 파라미터 테이블 자동 생성(unity build), ctypes 실행기 | `bmskit.sil` |
+| [D] 잔차 서명 | ✅ 운전 영역 분해, 영역별 RMSE·편향 | `infer.regimes`, `infer.signature` |
+| [E] 귀속·예측 | ✅ 민감도 행렬, 사전분포 정규화 선형 예측, 영역별 기여 | `infer.jacobian`, `infer.predict` |
+| [G] 식별성·선택 | ✅ 공선성 지수, 탐욕적 전진 선택, 제외 이유 | `infer.collinearity`, `infer.select` |
+| [H] 최적화 | ✅ Levenberg–Marquardt (사전분포 정규화) | `infer.fit` |
+| [I] 검증 | ✅ 되돌림 검사로 기여 없는 파라미터 제외 후 재최적화 | `infer.prune`, `infer.pipeline` |
+| [B] 사전분포·재파라미터화, [F] 서명↔원인 지식표 | ⏳ 실제 코드를 보고 작성 | - |
+| Morris 전역 민감도, BO | ⏳ 필요 시 추가 | - |
+
+검증 결과: [도구 체인 검증 실험](/research/07_experiment_toolchain_check.md)
+
 ## 5. 구현 위치
 
 | 단계 | 모듈 |
@@ -166,7 +182,7 @@ LLM 규칙
 
 | 위험 | 대응 |
 |---|---|
-| C 모델이 HAL에 묶여 단독 빌드가 어려움 | 스텁 HAL, 모델 부분만 분리. 안 되면 Python으로 모델 재구현 후 동등성 확인(비용 큼) |
+| C 모델이 HAL에 묶여 단독 빌드가 어려움 | 스텁 HAL, 모델 부분만 분리, unity build 파라미터 테이블(`bmskit.sil.wrapgen`). 모델을 다른 언어로 재구현하지 않는다(ADR-021) |
 | 선형 예측이 크게 빗나감 (강한 비선형) | Morris 보완, 2단계(선형 순위 → 짧은 BO로 재평가) |
 | 데이터 문제를 파라미터로 흡수(과적합) | 데이터 품질 검사 선행, 센서 오프셋 별도 추정, 검증 로그 분리 |
 | 고정소수점 모델이라 작은 파라미터 변화가 양자화에 묻힘 | 민감도는 float 빌드로 계산하고 최종 확인만 fixed 빌드로 (현재는 FW 개발 전이라 float 모델만 대상) |

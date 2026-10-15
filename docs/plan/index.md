@@ -3,7 +3,7 @@ type: Index
 title: 계획 문서 목차
 ---
 
-# 계획 (v0.4)
+# 계획 (v0.5)
 
 | 문서 | 내용 |
 |---|---|
@@ -15,6 +15,6 @@ title: 계획 문서 목차
 | [05 위험 관리 대장](/plan/05_risk_register.md) | 위험 25개, 점수, 대응, 비상 계획 |
 | [06 갭 검토](/plan/06_gap_review.md) | v0.1의 갭 20개와 보완, 남은 갭 |
 | [07 추가 기능 제안](/plan/07_additional_features.md) | F1~F20, 권장 순서 |
-| [08 결정 기록](/plan/08_decisions.md) | 작업 규칙, ADR 20개, 질문·답변 현황 12개 |
+| [08 결정 기록](/plan/08_decisions.md) | 작업 규칙, ADR 23개, 질문·답변 현황 13개 |
 | [09 파라미터 추론·예측](/plan/09_param_inference.md) | AI가 최적화 대상을 추론하고 개선량을 예측하는 파이프라인, 평가 방법 |
 | [10 SPM 모델 정확도 트랙](/plan/10_model_accuracy_track.md) | **현재 최우선.** 벤치마크, 잔차 분해, SPM 확장 후보, 정확도-연산량 파레토 |

@@ -3,10 +3,15 @@
 이 파일은 Claude Code와 OpenCode가 함께 읽는 에이전트 지침의 원본이다. CLAUDE.md는 이 파일을 import만 한다.
 
 ## 프로젝트
+**최우선 원칙: 새 모델을 만들지 않는다. 분석·개선 대상은 사용자의 C 코드(SPM)다.** 사용자 코드는 수정하지 않고 SIL로 실행하며, 개선은 근거가 붙은 패치 제안으로 낸다.
+
 BMS SW 성능 분석·개선용 AI Plugin. 계획과 조사는 `docs/`에 있다(OKF v0.1 형식). 시작점은 `docs/index.md`다.
 
 ## 코드
 - `python/bmskit/`: 분석 엔진 (표준 라이브러리 우선). `logs/sbl.py`는 SBL v1 표준 로그(규격: `docs/spec/sbl_v1.md`), `logs/legacy.py`는 기존 엑셀·txt 로그 변환기
+- `codeintel/cparams.py`: C 파라미터 후보 추출 / `sil/`: 사용자 C 모델 SIL 실행(`bms_sil_api.h`, `wrapgen`, `runner`) / `optim/infer.py`: 최적화 대상 추론·검증 / `metrics/accuracy.py`: 세트 SOC·SOH·ISD 정확도
+- 사용 절차: `docs/guide/research_workflow.md`
+- `tests/fixtures/`의 C 코드는 도구 검증용 픽스처일 뿐 모델 제안이 아니다
 - 테스트: `python -m unittest discover -s tests` (Python 3.10+, 엑셀 테스트는 openpyxl이 있을 때만)
 - 로그를 다룰 때는 먼저 SBL로 변환한다: `PYTHONPATH=python python -m bmskit.logs.legacy suggest <파일>` → 매핑 검토 → `convert`
 

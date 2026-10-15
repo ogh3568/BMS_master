@@ -26,6 +26,10 @@ timestamp: 2026-10-15T00:00:00Z
 10. [파라미터 추론·예측 설계](/plan/09_param_inference.md): AI가 최적화 대상 파라미터를 고르고 효과를 예측하는 방법
 11. [SPM 모델 정확도 향상 트랙](/plan/10_model_accuracy_track.md): 현재 최우선 목표. 평가 체계, 구조 오차 분리, 확장 후보, 정확도-연산량 파레토
 
+## 가이드
+
+- [연구 워크플로](/guide/research_workflow.md): 사용자 C 코드 분석·SIL·파라미터 추론·세트 정확도 평가 도구 사용법
+
 ## 규격
 
 - [SBL v1 표준 로그 형식](/spec/sbl_v1.md) ([규격 목차](/spec/index.md))

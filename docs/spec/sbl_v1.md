@@ -80,12 +80,13 @@ t[s]	pack.v[V]	pack.i[A]	cell.v.01[V]	...   ← 헤더: 이름[단위]
 | | `bms.ttf` | s | L2 | 만충 예상 시간 |
 | | `bms.capacity` | Ah | L2 | 추정 용량 |
 | | `bms.state`, `bms.mode`, `bms.fault_code` | - | L2 | 상태·코드 (코드표는 `#!` desc 또는 메타) |
+| | `bms.isd_flag`, `bms.isd_cell`, `bms.isd_r` | -, -, Ohm | L2 | ISD 감지 여부, 의심 셀 번호, 추정 단락 저항 |
 | | `bms.<기타>` | 자유 | L2 | 그 밖의 BMS 출력 |
 | 플래그 | `flag.<이름>` (예: `flag.ov`, `flag.uv`, `flag.oc_chg`, `flag.ot`) | - (0/1) | L2 | 보호·고장 플래그 |
 | 밸런싱 | `bal.NN` | - (0/1) | L2 | 셀별 밸런싱 활성 |
 | 충전기 | `chg.v_req`, `chg.i_req`, `chg.<기타>` | V, A | L2 | 충전 요구값 |
 | **BMS 내부 모델** | `model.<이름>` (예: `model.v_pred`, `model.ocv`, `model.eta_neg`, `model.soc_surf_neg`, `model.cs_avg_pos`) | 자유 | **L3** | 경량 전기화학 모델(SPM 계열) 내부 상태·예측값. **파라미터 최적화와 잔차 진단에 핵심** |
-| **기준 측정** | `ref.v`, `ref.i`, `ref.soc`, `ref.ah`, `ref.<기타>` | V, A, %, Ah | **R** | 충방전기·정밀 계측 등 BMS와 독립된 참값 |
+| **기준 측정** | `ref.v`, `ref.i`, `ref.soc`, `ref.ah`, `ref.soh`, `ref.<기타>` | V, A, %, Ah, % | **R** | 충방전기·정밀 계측 등 BMS와 독립된 참값 |
 | 스웰링 | `swell.thickness[.NN]`, `swell.pressure[.NN]` | mm, kPa | S | 두께·압력 센서 |
 | 사용자 정의 | `x.<이름>` | 자유 | X | 표준 이름이 없는 신호 (손실 방지) |
 
@@ -127,6 +128,10 @@ t[s]	pack.v[V]	pack.i[A]	cell.v.01[V]	...   ← 헤더: 이름[단위]
 | `sampling` | 선택 | `fixed:0.1`, `variable` | 샘플링 방식 |
 | `device`, `operator`, `project` | 선택 | | 장비·작성자·프로젝트 |
 | `legacy.*` | 자동 | | 변환기가 원본 파일 머리말에서 옮긴 값 |
+| `env` | 선택 | `cold_chamber`, `summer_field` | 세트 평가 환경 이름 (환경별 집계 키) |
+| `ref.soc0`, `ref.capacity_ah` | 선택 | 90, 50 | `ref.soc`가 없을 때 쿨롱 카운팅 기준 SOC를 만들기 위한 시작 SOC와 용량 |
+| `ref.soh` | 선택 | 95.2 | 참 SOH (용량 시험 등) |
+| `label.isd`, `label.isd_cell`, `label.isd_r_ohm`, `label.isd_t_start` | 선택 | yes, 3, 100, 600 | ISD 정답 라벨 (평가용) |
 
 모르는 키가 있어도 오류가 아니다(확장 가능).
 

@@ -23,8 +23,8 @@ timestamp: 2026-10-15T00:00:00Z
 | numpy, scipy | 수치 계산 | BSD-3 | 허용 | ⚪ | 필수 |
 | pyyaml | 설정·frontmatter | MIT | 허용 | ⚪ | 필수 |
 | jinja2 | 리포트 템플릿 | BSD-3 | 허용 | ⚪ | 필수 |
-| tree-sitter (core, CLI) | 코드 파싱 | MIT | 허용 | 🟡 | 필수 |
-| tree-sitter-c | C 문법 | MIT | 허용 | 🟡 | 필수 |
+| tree-sitter (core, CLI) | 코드 파싱 | MIT | 허용 | ✅ 설치 패키지 메타데이터 (0.26.0) | 선택 `[code]` |
+| tree-sitter-c | C 문법 | MIT | 허용 | ✅ 설치 패키지 메타데이터 (0.24.2) | 선택 `[code]` |
 | libclang | 정밀 전처리 | Apache-2.0 + LLVM 예외 | 허용 | ⚪ | 선택 |
 | pyarrow | Parquet | Apache-2.0 | 허용 | ⚪ | 선택 `[parquet]` |
 | openpyxl | `.xlsx` 읽기·쓰기 (SBL 엑셀, 기존 엑셀 로그) | MIT | 허용 | ⚪ (이번 검색에서 미확인, PyPI 확인 필요) | 선택 `[excel]` |

@@ -33,7 +33,16 @@ timestamp: 2026-10-15T00:00:00Z
 | MCP | 프로젝트 `.mcp.json` | ⚪ |
 | 헤드리스 | `claude -p` | ⚪ |
 
-## 3. 설계 결론
+## 3. 사내 LLM gateway 연결 (2026-10-15 추가)
+
+| 항목 | 내용 | 검증 |
+|---|---|---|
+| Claude Code | LLM gateway는 조직이 운영하는 Claude Code와 모델 제공자 사이의 프록시. `ANTHROPIC_BASE_URL`로 지정하고 조직 발급 자격증명으로 인증. 사내 HTTP 프록시(`HTTPS_PROXY`)와는 별개이고 함께 쓸 수 있음 | 🟡 공식 문서 검색 결과 (code.claude.com llm-gateway-connect, 엔터프라이즈 개요) |
+| 설정 위치 | 셸 export와 settings 파일 env 블록이 같으면 settings 값이 우선. 자격증명은 커밋되는 프로젝트 `.claude/settings.json`에 넣지 말 것 | 🟡 |
+| OpenCode | 내장 provider의 `options.baseURL`로 gateway 지정(`provider.anthropic.options.baseURL`). OpenAI 호환이면 `npm: "@ai-sdk/openai-compatible"` 사용자 정의 provider + `models` 정의 + `/connect` | ✅ OpenCode 저장소 문서(providers.mdx) |
+| 확인할 것 | 사내 gateway가 Anthropic Messages API 형식인지, 도구 호출·스트리밍·프롬프트 캐시를 그대로 전달하는지 | - |
+
+## 4. 설계 결론
 
 1. AGENTS.md를 원본으로 두고, CLAUDE.md는 `@AGENTS.md` import와 Claude 전용 보충만 담는다.
 2. Skills는 `.claude/skills/`에 둔다. 양쪽 모두 공식 경로다. frontmatter는 공통 필드만 쓴다.
@@ -50,3 +59,6 @@ timestamp: 2026-10-15T00:00:00Z
 - https://www.mdskills.ai/skills/opencode
 - https://www.morphllm.com/claude-code-marketplace
 - https://skills.sh/aiskillstore/marketplace/plugin-structure
+- https://code.claude.com/docs/en/llm-gateway-connect.md
+- https://docs.anthropic.com/en/docs/claude-code/bedrock-vertex
+- https://raw.githubusercontent.com/sst/opencode/dev/packages/web/src/content/docs/providers.mdx

@@ -27,6 +27,8 @@ timestamp: 2026-10-15T00:00:00Z
 | tree-sitter-c | C 문법 | MIT | 허용 | 🟡 | 필수 |
 | libclang | 정밀 전처리 | Apache-2.0 + LLVM 예외 | 허용 | ⚪ | 선택 |
 | pyarrow | Parquet | Apache-2.0 | 허용 | ⚪ | 선택 `[parquet]` |
+| openpyxl | `.xlsx` 읽기·쓰기 (SBL 엑셀, 기존 엑셀 로그) | MIT | 허용 | ⚪ (이번 검색에서 미확인, PyPI 확인 필요) | 선택 `[excel]` |
+| xlrd | 구형 `.xls` 읽기 (2.0부터 `.xlsx` 미지원) | BSD-3 | 허용 | 🟡 | 선택, 필요할 때만 |
 | plotly.py | 인터랙티브 그래프 | MIT | 허용 | 🟡 (오래된 Debian 사본 기준, 현재 저장소 확인 필요) | 필수 또는 선택 |
 | LTTB (lttb, pylttb) | 다운샘플링 | MIT | 허용 | 🟡 | 자체 구현(약 50줄) |
 | matplotlib | 정적 그래프 | PSF 계열 | 허용 | ⚪ | 선택 |
@@ -61,6 +63,7 @@ timestamp: 2026-10-15T00:00:00Z
 
 ## 출처
 
+- https://openapps.pro/packages/xlrd
 - https://libraries.io/pypi/asammdf
 - https://pypistats.org/packages/asammdf
 - https://pya2l.readthedocs.io/en/latest/README.html

@@ -22,7 +22,12 @@ timestamp: 2026-10-15T00:00:00Z
 6. [위험 관리 대장](/plan/05_risk_register.md): 위험 점수, 징후, 대응, 비상 계획
 7. [갭 검토](/plan/06_gap_review.md): v0.1 계획의 부족한 점과 보완 내용
 8. [추가 기능 제안](/plan/07_additional_features.md): 있으면 좋은 기능과 우선순위
-9. [결정 기록](/plan/08_decisions.md): 확정된 결정(ADR)과 미결 질문
+9. [결정 기록](/plan/08_decisions.md): 확정된 결정(ADR)과 질문·답변 현황
+10. [파라미터 추론·예측 설계](/plan/09_param_inference.md): AI가 최적화 대상 파라미터를 고르고 효과를 예측하는 방법
+
+## 규격
+
+- [SBL v1 표준 로그 형식](/spec/sbl_v1.md) ([규격 목차](/spec/index.md))
 
 ## 조사 자료
 

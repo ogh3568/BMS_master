@@ -5,6 +5,13 @@ title: 문서 변경 이력
 
 # 변경 이력
 
+## 2026-10-15 — v0.3 (사용자 답변 반영)
+- 답변: 사내 gateway API로 코드·로그 전송 가능 / BMS는 C / 로그는 엑셀·txt 시계열(세부 비공개) / 기존 모델은 P2D보다 훨씬 가벼운 경량 모델(SPM 계열 추정) / 34개는 최소 정보, 최적화 대상은 AI가 추론
+- 신규 규격: [SBL v1](/spec/sbl_v1.md) 표준 로그 형식 + 참조 구현(`python/bmskit/logs/sbl.py`, `legacy.py`), 예제, 테스트(Python 3.10~3.13 통과)
+- 신규 설계: [파라미터 추론·예측](/plan/09_param_inference.md) — 코드 후보 발견 → SIL 잔차 서명 → 민감도 귀속·개선량 예측 → 식별성 → 부분집합 최적화 → 예측 검증. 34개는 블라인드 평가 기준
+- ADR-013~017 추가 (gateway, SBL, 사내 C 모델 시뮬레이터, AI 파라미터 추론, SIL 앞당김), 질문 현황 갱신
+- 갱신: 00 개요(v0.3), 01 R4 수용 기준, 02 로그 스키마 → SBL·gateway 연결, 03 M2/M5/M13, 04 WBS(P1에 SIL, P2 재구성), 05 위험(K1 하향, K21~K23 추가), 조사 02(gateway)·05(openpyxl, xlrd)
+
 ## 2026-10-15 — v0.2
 - 문서를 OKF 번들 구조(`docs/plan`, `docs/research`)로 재구성
 - `PLAN_feasibility.md`(v0.1)를 `plan/00_overview.md`로 옮기고 v0.2로 갱신

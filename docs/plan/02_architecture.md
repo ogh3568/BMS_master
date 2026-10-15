@@ -67,9 +67,12 @@ BMS_master/
 └── pyproject.toml
 ```
 
-## 3. 표준 로그 스키마 (`schemas/log.v1.json`)
+## 3. 표준 로그 형식 → SBL v1
 
-저장 형식은 Parquet(선택 의존성 pyarrow)이고, pyarrow가 없으면 CSV와 메타 JSON으로 대신한다. 롱(long) 형식이 아니라 와이드(wide) 형식을 쓴다.
+> **v0.3에서 대체됨.** 표준 로그 형식은 [SBL v1 규격](/spec/sbl_v1.md)으로 확정했다(텍스트 TSV/CSV + 엑셀, `name[unit]` 헤더, 계층형 채널 이름, 적합 등급 L0~L3/+R/+S). 참조 구현은 `python/bmskit/logs/`. 아래 표는 v0.2 초안으로, 이름 규칙이 SBL과 다르다(예: `cell_v_{k}` → `cell.v.NN`, `soc_bms` → `bms.soc`). Parquet은 대용량 내부 캐시용 표현으로 남긴다.
+
+<details><summary>v0.2 초안 (참고용)</summary>
+
 
 | 열 | 타입 | 단위 | 필수 | 설명 |
 |---|---|---|---|---|
@@ -86,7 +89,9 @@ BMS_master/
 | `ref_*` | float32 | - | ○ | 기준값(충방전기 전류, 실험실 SOC 등) |
 | `x_*` | any | - | ○ | 제조사·프로젝트 고유 신호 |
 
-**메타 (`*.meta.json`)**: `schema_version`, `source_file`, `source_hash`(sha256), `fw_version`, `param_set_id`, `cell_model`, `chemistry`(NCM/NCA/LFP/LMFP/Na-ion), `topology`(예: 14S2P), `nominal_capacity_Ah`, `sample_rate_hint`, `current_sign`, `timezone`, `state_codes`, `channels_map`(원본 신호명 → 표준 열), `quality`(결측률, 시간 역행 횟수, 포화 횟수).
+</details>
+
+**메타 (v0.2 초안, SBL §5로 대체)**: `schema_version`, `source_file`, `source_hash`(sha256), `fw_version`, `param_set_id`, `cell_model`, `chemistry`(NCM/NCA/LFP/LMFP/Na-ion), `topology`(예: 14S2P), `nominal_capacity_Ah`, `sample_rate_hint`, `current_sign`, `timezone`, `state_codes`, `channels_map`(원본 신호명 → 표준 열), `quality`(결측률, 시간 역행 횟수, 포화 횟수).
 
 ## 4. 파라미터 레지스트리 (`params/registry.yaml`, `schemas/params.v1.json`)
 
@@ -199,5 +204,6 @@ hot: {views_30d: 0, churn_90d: 0, issues: 0, score: 0.0}
 | 서브에이전트/명령 | `.claude/agents`, `.claude/commands` | `opencode.json`의 `agent` 등 | 원본 1벌, `tools/sync_agents.py`로 변환 |
 | 배포 | 플러그인 (`.claude-plugin/plugin.json`, 사내 git 마켓플레이스) | 저장소 복제 또는 전역 설정 디렉터리 | 같은 git 저장소에서 둘 다 제공 |
 | 헤드리스 | `claude -p` | `opencode run` | GUI의 AI 실행기가 선택 |
+| **LLM 연결 (사내 gateway)** | `ANTHROPIC_BASE_URL` = gateway 주소, 조직 발급 자격증명(`ANTHROPIC_AUTH_TOKEN` 등). 자격증명은 커밋되는 `.claude/settings.json`에 넣지 않음 | `opencode.json` → `provider.anthropic.options.baseURL` (Anthropic 호환 gateway) 또는 `@ai-sdk/openai-compatible` 사용자 정의 provider | 설치 스크립트가 사용자 환경에 설정. 저장소에는 예시 파일만 |
 
 환경변수 `OPENCODE_DISABLE_CLAUDE_CODE=1`이 설정되면 OpenCode가 `.claude/` 경로를 무시한다. 설치 가이드와 스모크 테스트에서 이 설정을 확인한다.

@@ -5,6 +5,11 @@
 ## 프로젝트
 BMS SW 성능 분석·개선용 AI Plugin. 계획과 조사는 `docs/`에 있다(OKF v0.1 형식). 시작점은 `docs/index.md`다.
 
+## 코드
+- `python/bmskit/`: 분석 엔진 (표준 라이브러리 우선). `logs/sbl.py`는 SBL v1 표준 로그(규격: `docs/spec/sbl_v1.md`), `logs/legacy.py`는 기존 엑셀·txt 로그 변환기
+- 테스트: `python -m unittest discover -s tests` (Python 3.10+, 엑셀 테스트는 openpyxl이 있을 때만)
+- 로그를 다룰 때는 먼저 SBL로 변환한다: `PYTHONPATH=python python -m bmskit.logs.legacy suggest <파일>` → 매핑 검토 → `convert`
+
 ## 작업 규칙
 - 변경은 지정된 개발 브랜치에 커밋하고 **push만** 한다. **PR은 만들지 않는다.**
 - 계획·조사·결정이 바뀌면 `docs/`의 해당 문서를 갱신하고 `docs/log.md`에 이력을 남긴다.

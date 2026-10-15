@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bmskit"
+version = "0.1.0"
+description = "Deterministic analysis engine for the BMS AI Plugin"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+excel = ["openpyxl"]
+
+[tool.setuptools.packages.find]
+where = ["python"]

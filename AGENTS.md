@@ -17,4 +17,6 @@ BMS SW 성능 분석·개선용 AI Plugin. 계획과 조사는 `docs/`에 있다
 - `docs/` 문서는 YAML frontmatter에 `type`을 반드시 넣고, 문서 간 링크는 `docs/` 기준 루트 경로(`/plan/...`)를 쓴다.
 - 조사 내용은 검증 수준(✅ 1차 확인 / 🟡 2차 출처 / ⚪ 미확인)을 표시하고 출처 URL을 남긴다.
 - Python은 3.10+ 호환. 새 의존성은 `docs/research/05_licenses_dependencies.md` 정책을 따른다(GPL·무라이선스 금지, LGPL은 선택 extras만).
+- **외부 MCP 서버에 의존하지 않는다**(사내 정책). 도구는 저장소의 로컬 MCP와 CLI로 제공하고, Skills는 CLI만으로도 동작해야 한다.
+- 현재 최우선 목표는 SPM 모델 정확도 향상이다(`docs/plan/10_model_accuracy_track.md`). FW 저전력 모델은 연구 단계다.
 - 설계 원칙: 계산은 결정론적 도구, LLM은 해석만. 수치 주장에는 근거(run_id 등)를 붙인다.

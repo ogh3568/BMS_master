@@ -36,6 +36,8 @@ timestamp: 2026-10-15T00:00:00Z
                           └─────────────────────────────────────────────┘
 ```
 
+**MCP 정책 (ADR-018)**: 사내에서는 외부 MCP를 쓸 수 없다. `bms-mcp`는 저장소에 포함된 로컬 stdio 서버(네트워크 접근 없음)다. 같은 기능을 모두 CLI(`python -m bmskit...`)로도 제공해, MCP가 막혀도 Skills가 Bash로 동작한다. 서드파티·원격 MCP는 의존하지 않는다.
+
 **의존 규칙**
 - 위 계층은 아래 계층만 호출한다.
 - `bmskit`는 LLM SDK에 의존하지 않는다. LLM 호출은 Agent 계층과 GUI의 "AI 실행기"에서만 한다.
@@ -200,7 +202,7 @@ hot: {views_30d: 0, churn_90d: 0, issues: 0, score: 0.0}
 |---|---|---|---|
 | 지침 | CLAUDE.md | AGENTS.md (CLAUDE.md 폴백은 제거됐다는 보고가 있음) | **AGENTS.md가 원본**, CLAUDE.md는 import만 |
 | Skills | `.claude/skills/` | `.claude/skills/` 공식 지원 (그 밖에 `.opencode/skills/`, `.agents/skills/`) | `.claude/skills/` 한 곳에 둔다. frontmatter는 공통 필드(`name`, `description`)만 쓴다 |
-| MCP | `.mcp.json` | `opencode.json` → `mcp.<name>.{type:"local", command:[...]}` | 같은 서버, 설정 파일만 2개 (생성 스크립트로 맞춤) |
+| MCP | `.mcp.json` | `opencode.json` → `mcp.<name>.{type:"local", command:[...]}` | 같은 **로컬** 서버, 설정 파일만 2개 (생성 스크립트로 맞춤). **외부 MCP 불가 → CLI 폴백 필수** (ADR-018) |
 | 서브에이전트/명령 | `.claude/agents`, `.claude/commands` | `opencode.json`의 `agent` 등 | 원본 1벌, `tools/sync_agents.py`로 변환 |
 | 배포 | 플러그인 (`.claude-plugin/plugin.json`, 사내 git 마켓플레이스) | 저장소 복제 또는 전역 설정 디렉터리 | 같은 git 저장소에서 둘 다 제공 |
 | 헤드리스 | `claude -p` | `opencode run` | GUI의 AI 실행기가 선택 |

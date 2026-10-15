@@ -24,6 +24,7 @@ timestamp: 2026-10-15T00:00:00Z
 8. [추가 기능 제안](/plan/07_additional_features.md): 있으면 좋은 기능과 우선순위
 9. [결정 기록](/plan/08_decisions.md): 확정된 결정(ADR)과 질문·답변 현황
 10. [파라미터 추론·예측 설계](/plan/09_param_inference.md): AI가 최적화 대상 파라미터를 고르고 효과를 예측하는 방법
+11. [SPM 모델 정확도 향상 트랙](/plan/10_model_accuracy_track.md): 현재 최우선 목표. 평가 체계, 구조 오차 분리, 확장 후보, 정확도-연산량 파레토
 
 ## 규격
 

@@ -224,7 +224,9 @@ knowledge/
 - 표준 로그 → 입력 신호 주입 → 알고리즘 주기 호출(로그 시간축으로 스텝) → 출력 기록 → 기준 대비 오차, 실행 시간(사이클 근사) 측정.
 - 파라미터 세트를 바꿔 끼울 수 있다. 캘리브레이션 구조체는 메모리를 직접 덮어쓰거나 파일로 로드한다.
 
-**특화 버전 매트릭스**
+> **v0.4 우선순위 (ADR-019)**: FW 저전력 모델은 연구 단계다. 지금은 **x86 공유 라이브러리 + Python 바인딩(SIL용)**만 만든다. Android·FW 저전력·고정소수점 변종은 연구 결론 후 착수한다. 그 전까지는 [정확도-연산량 파레토](/plan/10_model_accuracy_track.md)로 연구를 지원한다.
+
+**특화 버전 매트릭스 (목표 상태)**
 
 | 변종 | 산출물 | 특징 | 검증 |
 |---|---|---|---|
@@ -243,6 +245,8 @@ knowledge/
 ---
 
 ## M7. 신규 기능 개발
+
+> **v0.4**: 현재 최우선 "기능"은 SPM 모델 정확도 향상이다. 구조 확장(전해질 보정, 열 결합, 히스테리시스 등)은 [모델 정확도 트랙](/plan/10_model_accuracy_track.md)에서 같은 절차로 다룬다.
 
 **공통 개발 절차 (Skill: `feature-dev`)**
 1. 요구 스펙 템플릿 작성: 입력 신호, 출력, 주기, 정확도, MCU 예산
@@ -275,7 +279,8 @@ knowledge/
 | `bms-param-optimize` | 선별 → 최적화 → 검증 | opt.*, synth.* |
 | `bms-feature-dev` | 신규 기능 개발 절차 | 전체 |
 | `bms-wiki-maintain` | ingest/query/lint, 핫스팟 갱신 | kb.* |
-| `bms-variant-build` | 특화 버전 빌드·동등성 확인 | sil.* |
+| `bms-model-accuracy` | 벤치마크 평가, 잔차 분해, SPM 확장 후보 비교, 정확도-연산량 파레토 | sil.*, opt.*, report.build |
+| `bms-variant-build` | 특화 버전 빌드·동등성 확인 (후순위) | sil.* |
 | `bms-synth-data` | 합성 데이터·고장 시나리오 생성 | synth.* |
 
 **서브에이전트**: `analyst`(가설 생성), `verifier`(반증 시도, 도구로 검증), `reviewer`(리포트 검토, 근거 누락 확인), `librarian`(위키 반영).
